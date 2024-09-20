@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-   [SerializeField] private Transform _barrel;
-   [SerializeField] private Bullet _bulletPrefab;
-   [SerializeField] private int _countInClip;
-   [SerializeField] private float _force;
-   [SerializeField] private float _shootDelay;
+    [SerializeField] private Transform _barrel;
+    [SerializeField] private Bullet _bulletPrefab;
+    [SerializeField] private int _countInClip;
+    [SerializeField] private float _force;
+    [SerializeField] private float _shootDelay;
 
     private Transform _bulletRoot;
     private Bullet[] _bullets;
@@ -32,8 +32,6 @@ public class Weapon : MonoBehaviour
         
         _lastShootTime += Time.deltaTime;
     }
-
-
 
     public void Fire()
     {
@@ -79,6 +77,10 @@ public class Weapon : MonoBehaviour
                 continue;
             }
 
+            if (_bullets[i].IsActive)
+            {
+                continue;
+            }
             candidate = i; 
             break;
         }

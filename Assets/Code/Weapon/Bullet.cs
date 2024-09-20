@@ -10,6 +10,9 @@ public class Bullet : MonoBehaviour
     private Rigidbody _rigidbody;
     private bool _isActive;
 
+
+
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -57,5 +60,13 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
         _isActive = false;
             
+    }
+
+    public bool IsActive
+    {
+        get
+        {
+            return _isActive;
+        }
     }
 }
