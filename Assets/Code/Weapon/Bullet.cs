@@ -7,6 +7,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
    [SerializeField] private float _force;
+    [SerializeField] private float _lifeTime;
     private Rigidbody _rigidbody;
     private bool _isActive;
 
@@ -48,10 +49,12 @@ public class Bullet : MonoBehaviour
     public void Run(Vector3 path, Vector3 startPosition)
     {
         transform.position = startPosition;
+        transform.SetParent(null);
         gameObject.SetActive(true);
         _rigidbody.WakeUp();
         _rigidbody.AddForce(path, ForceMode.Impulse);
         _isActive = true;
+        StartCoroutine(Die() );
     }
 
     public void Sleep()
@@ -68,5 +71,15 @@ public class Bullet : MonoBehaviour
         {
             return _isActive;
         }
+    }
+
+    private IEnumerator Die()
+    {
+        while (_lifeTime >= 0.0f)
+        {
+            _lifeTime -= 1.0f;
+            yield return new WaitForSeconds(1.0f);
+        }
+        Destroy(gameObject);
     }
 }
