@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _force: 1
+  _lifeTime: 2
 --- !u!54 &3847474038722735684
 Rigidbody:
   m_ObjectHideFlags: 0

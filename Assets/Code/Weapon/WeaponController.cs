@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-   [SerializeField] private Weapon _weapon;
+    [SerializeField] private Weapon _weapon;
 
 
     private void Update()

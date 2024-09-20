@@ -6,13 +6,19 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
-   [SerializeField] private float _force;
-    [SerializeField] private float _lifeTime;
+    [SerializeField] private float _force;
+    [SerializeField] private float _lifeTime = 7.0f;
+
+    public bool IsActive
+    {
+        get
+        {
+            return _isActive;
+        }
+    }
+    
     private Rigidbody _rigidbody;
     private bool _isActive;
-
-
-
 
     private void Awake()
     {
@@ -65,13 +71,7 @@ public class Bullet : MonoBehaviour
             
     }
 
-    public bool IsActive
-    {
-        get
-        {
-            return _isActive;
-        }
-    }
+   
 
     private IEnumerator Die()
     {
