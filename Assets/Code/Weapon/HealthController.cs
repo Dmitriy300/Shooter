@@ -7,8 +7,21 @@ public class HealthController : MonoBehaviour
     [SerializeField] private int _health;
     [SerializeField] private int _lifeTime;
 
-
     private bool _isAlive = true;
+    private int _maxHp;
+
+    public int MaxHp
+    {
+        get
+        {
+            return _maxHp;
+        }
+    }
+
+    private void Start()
+    {
+        _maxHp = _health;
+    }
 
     public bool CanTakeDamage(int damage)
     { 
