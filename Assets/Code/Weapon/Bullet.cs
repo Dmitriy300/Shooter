@@ -8,6 +8,9 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _force;
     [SerializeField] private float _lifeTime = 7.0f;
+    [SerializeField] private BulletProjectorData[] _bulletHoles;
+
+    private BulletProjectorHelper _projectorHelper;
 
     public bool IsActive
     {
@@ -23,6 +26,7 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _projectorHelper = new BulletProjectorHelper(_bulletHoles);
     }
 
     private void OnBecameInvisible()
@@ -42,7 +46,8 @@ public class Bullet : MonoBehaviour
         {
             if (healthController.CanTakeDamage(1))
             {
-                return ;
+                _projectorHelper.CreateBulletHole(other.contacts[0].point, other.contacts[0].normal, other.transform);
+                return;
             }
 
            if (other.collider.TryGetComponent(out Rigidbody rigidbody) == false)
@@ -68,11 +73,8 @@ public class Bullet : MonoBehaviour
         _rigidbody.Sleep();
         gameObject.SetActive(false);
         _isActive = false;
-            
+
     }
-
-   
-
     private IEnumerator Die()
     {
         while (_lifeTime >= 0.0f)

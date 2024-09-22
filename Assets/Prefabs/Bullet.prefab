@@ -121,6 +121,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _force: 36
   _lifeTime: 5
+  _bulletHoles:
+  - {fileID: 11400000, guid: 838eb4c9a1a5ddd46a1328ca9c1a8857, type: 2}
+  - {fileID: 11400000, guid: 5a7f6ad2aaa1d3e44bd4790661e7063e, type: 2}
 --- !u!54 &3847474038722735684
 Rigidbody:
   m_ObjectHideFlags: 0

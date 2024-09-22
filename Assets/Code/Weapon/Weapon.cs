@@ -4,18 +4,29 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    [SerializeField] protected int _level = 1;
     [SerializeField] protected Transform _barrel;
-    [SerializeField] private float _force;
-    [SerializeField] private float _shotDelay;
+    [SerializeField] private WeaponUpgradeData _upgradeData;
+    
+    protected bool CanShoot {  get; private set; }
+    protected float Force {  get; private set; }
+    protected float LastShootTime { get; set; }
 
-    protected bool CanShoot { get; private set; }
-    public float LastShootTime { get; protected set; }
-   
-    protected float Force
+
+    private float _shotDelay;
+
+
+    protected virtual void Start()
     {
-        get
+        if (_upgradeData.TryGetWeaponData(_level, out WeaponData data))
         {
-            return _force;
+            _shotDelay = data.ShotDelay;
+            Force = data.Force;
+        }
+        else
+        {
+            _shotDelay = _upgradeData.WeaponDataDefault.ShotDelay;
+            Force = _upgradeData.WeaponDataDefault.Force;
         }
     }
 
@@ -32,13 +43,5 @@ public abstract class Weapon : MonoBehaviour
     }
 
     public abstract void Fire();
-
     public abstract void Recharge();
-   
-
-
-
-
-
-
 }

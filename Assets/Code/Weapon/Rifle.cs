@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class Gun : Weapon
+public sealed class Rifle : Weapon
 {
     [SerializeField] private int _countInClip;
     [SerializeField] private Bullet _bulletPrefab;
@@ -13,7 +13,7 @@ public sealed class Gun : Weapon
     protected override void Start()
     {
         base.Start();
-        _bulletRoot = new GameObject("BulletRoot").transform;
+        _bulletRoot = new GameObject("PatronRoot").transform;
         Recharge();
     }
 
@@ -76,5 +76,5 @@ public sealed class Gun : Weapon
         bullet = _bullets[candidate];
         return true;
     }
-}
 
+}
