@@ -15,7 +15,6 @@ public abstract class Weapon : MonoBehaviour
 
     private float _shotDelay;
 
-
     protected virtual void Start()
     {
         if (_upgradeData.TryGetWeaponData(_level, out WeaponData data))
