@@ -14,7 +14,13 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
-        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+        // Переключение оружия на правую кнопку мыши
+        if (Input.GetMouseButtonDown(1)) // 1 - это правая кнопка мыши
+        {
+            _weaponSelector.Next(); // Переключаемся на следующее оружие
+        }
+
+        //float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
 
         //if (scrollWheel > 0.1f)
         //{
@@ -36,11 +42,7 @@ public class WeaponController : MonoBehaviour
             _weaponSelector.Recharge();
         }
 
-        // Переключение оружия на правую кнопку мыши
-        if (Input.GetMouseButtonDown(1)) // 1 - это правая кнопка мыши
-        {
-            _weaponSelector.Next(); // Переключаемся на следующее оружие
-        }
+       
     }
 
 }
