@@ -6,12 +6,15 @@ public sealed class Gun : Weapon
 {
     [SerializeField] private int _countInClip;
     [SerializeField] private Bullet _bulletPrefab;
-
+    [SerializeField] private AudioClip _shootClip;
     private Transform _bulletRoot;
-    private Queue<Bullet> _bullets ;
+    private Queue<Bullet> _bullets;
 
+    private AudioSource _audioSource;
     protected override void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+
         base.Start();
         _bullets = new Queue<Bullet>(_countInClip);
         _bulletRoot = new GameObject("BulletRoot").transform;
@@ -27,6 +30,7 @@ public sealed class Gun : Weapon
 
         if (_bullets.TryDequeue(out Bullet bullet))
         {
+            _audioSource.PlayOneShot(_shootClip);
             bullet.Run(_barrel.forward * Force, _barrel.position);
             LastShootTime = 0.0f;
         }

@@ -8,12 +8,15 @@ public sealed class Shotgun : Weapon
     [SerializeField] private Fraction _fractionPrefab;
     [SerializeField] private int _pelletCount = 10;
     [SerializeField] private float spreadAngle;
+    [SerializeField] private AudioClip _shootClip;
 
     private Transform _fractionRoot;
     private Queue<Fraction> _fractions;
+    private AudioSource _audioSource;
    
     protected override void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         base.Start();
         _fractions = new Queue<Fraction>(_countInClip);
         _fractionRoot = new GameObject("Fraction").transform;
@@ -31,6 +34,7 @@ public sealed class Shotgun : Weapon
         {
             if (_fractions.TryDequeue(out Fraction fraction))
             {
+                _audioSource.PlayOneShot(_shootClip);
                 // Генерируем случайный угол разброса
                 float spreadX = Random.Range(-spreadAngle, spreadAngle);
                 float spreadY = Random.Range(-spreadAngle, spreadAngle);
@@ -44,7 +48,7 @@ public sealed class Shotgun : Weapon
         }
     
     }
-    
+
     public override void Recharge()
     {
         for (int i = 0; i < _countInClip; i++)
